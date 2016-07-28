@@ -1,10 +1,5 @@
 #Docker DevOps Atua
 
-##Clone
+##Install Docker Compose
 
-    git clone https://github.com/atua/docker-devops
-    cd docker-devops
-
-##Run
-
-    docker-compose up
+https://docs.docker.com/compose/install/
