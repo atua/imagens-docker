@@ -6,6 +6,6 @@ sudo aptitude install python-pip
 sudo pip install --upgrade pip
 sudo pip install docker-compose
 
-#OR
+##OR
 
 https://docs.docker.com/compose/install/
