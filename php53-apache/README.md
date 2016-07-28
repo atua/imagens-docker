@@ -7,6 +7,7 @@
 
 ##Run
 
+    docker pull atuadevops/php53-apache
     docker-compose up
 
 ##Cuidados
