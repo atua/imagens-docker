@@ -1,0 +1,6 @@
+/^To: .*@atua.com.br,.*/ REJECT Email do Macanudo apenas para atua :P
+/^To: .*@atua.com.br$/ OK E-mail aceito
+/^To: .*@atua.com.br/ OK E-mail aceito
+/^To: .*/ REJECT Email do Macanudo apenas para atua :P
+/^Cc: .*@atua.com.br/ OK E-mail aceito
+/^Cc: .*/ REJECT Email do Macanudo apenas para atua :P
