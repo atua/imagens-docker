@@ -5,7 +5,7 @@ RUN apt-get install -y software-properties-common git vim
 
 RUN apt-get update
 RUN apt-get install --allow-unauthenticated -y apache2 libapache2-mod-php7.0
-RUN apt-get install --allow-unauthenticated -y php php7.0-gd php7.0-cgi php7.0-curl php-json php7.0-pgsql php-xdebug php7.0-soap php7.0-xml
+RUN apt-get install --allow-unauthenticated -y php php7.0-gd php7.0-cgi php7.0-curl php-json php7.0-pgsql php-xdebug php7.0-soap php7.0-xml php7.0-imap
 RUN apt-get install -y build-essential unzip xmlsec1 zip libxmlsec1 libxmlsec1-openssl
 RUN apt-get install -y mcrypt
 
