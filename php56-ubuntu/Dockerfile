@@ -1,4 +1,4 @@
-FROM ubuntu:15.10
+FROM ubuntu:15.04
 
 RUN apt-get update
 RUN apt-get install -y software-properties-common git vim
