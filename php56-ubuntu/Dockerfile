@@ -27,7 +27,6 @@ ADD config/php/20-xdebug.ini /etc/php5/apache2/conf.d/
 
 RUN php -r "readfile('https://getcomposer.org/installer');" | php; mv composer.phar /usr/local/bin/composer; chmod +x /usr/local/bin/composer
 
-RUN apt-get install -y net-tools
 ADD config/start.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/start.sh
 CMD ["/usr/local/bin/start.sh"]
