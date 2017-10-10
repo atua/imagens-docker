@@ -1,12 +1,14 @@
-FROM ubuntu:15.04
+FROM ubuntu:16.04
 
 RUN apt-get update
 RUN apt-get install -y software-properties-common git vim
 
+RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php -y
 RUN apt-get update
 RUN apt-get install --allow-unauthenticated -y apache2 libapache2-mod-php5
 RUN apt-get install --allow-unauthenticated -y php5 php5-gd php5-cgi php5-curl php5-json php5-pgsql \ 
                                                php5-xdebug php5-imap php5-imagick php5-mcrypt
+RUN php5enmod mcrypt
 RUN apt-get install -y build-essential unzip xmlsec1 zip libxmlsec1 libxmlsec1-openssl 
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y postfix >> /dev/null || :
