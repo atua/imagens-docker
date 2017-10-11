@@ -1,4 +1,4 @@
-##Ubuntu 16.04 | PHP 5.6 | PHP 7
+Ubuntu 16.04 | PHP 5.6 | PHP 7
 
 PHP 5.6
 
