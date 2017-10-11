@@ -15,17 +15,17 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y postfix >> /dev/null || :
 ADD config/postfix/filtro /etc/postfix/
 ADD config/postfix/main.cf /etc/postfix/
 
-RUN rm -rf /etc/php5/apache2/php.ini
-ADD config/php/php.ini /etc/php5/apache2/
+RUN rm -rf /etc/php/5.6/apache2/php.ini
+ADD config/php/php.ini /etc/php/5.6/apache2/
 
-RUN rm -rf /etc/php5/cgi/php.ini
-ADD config/php/php.ini /etc/php5/cgi/
+RUN rm -rf /etc/php/5.6/cgi/php.ini
+ADD config/php/php.ini /etc/php/5.6/cgi/
 
-RUN rm -rf /etc/php5/cli/php.ini
-ADD config/php/cli/php.ini /etc/php5/cli/
+RUN rm -rf /etc/php/5.6/cli/php.ini
+ADD config/php/cli/php.ini /etc/php/5.6/cli/
 
-RUN rm -rf /etc/php5/apache2/conf.d/20-xdebug.ini
-ADD config/php/20-xdebug.ini /etc/php5/apache2/conf.d/
+RUN rm -rf /etc/php/5.6/apache2/conf.d/20-xdebug.ini
+ADD config/php/20-xdebug.ini /etc/php/5.6/apache2/conf.d/
 
 RUN php -r "readfile('https://getcomposer.org/installer');" | php; \
     mv composer.phar /usr/local/bin/composer; \
