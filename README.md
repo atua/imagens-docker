@@ -1,11 +1,12 @@
-#Docker DevOps Atua
+##Ubuntu 16.04 | PHP 5.6 | PHP 7
 
-##Install Docker Compose
+PHP 5.6
 
-    sudo aptitude install python-pip
-    sudo pip install --upgrade pip
-    sudo pip install docker-compose
+    $ sudo docker pull atuadevops/php:56
+    $ sudo docker run --name php56 -h php56 -d -p 8056:80 -v /etc/localtime:/etc/localtime:ro -v /var/www/html/:/var/www/html atuadevops/php:56
 
-##OR
 
-https://docs.docker.com/compose/install/
+PHP 7
+
+    $ sudo docker pull atuadevops/php:7
+    $ sudo docker run --name php7 -h php7 -d -p 8070:80 -v /etc/localtime:/etc/localtime:ro -v /var/www/html/:/var/www/html atuadevops/php:7
