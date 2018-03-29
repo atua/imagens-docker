@@ -15,6 +15,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y postfix >> /dev/null || :
 ADD config/postfix/filtro /etc/postfix/
 ADD config/postfix/main.cf /etc/postfix/
 
+RUN apt-get install -y php-pear
+RUN apt-get install -y php-dev
+RUN apt-get install -y pkg-config
+RUN pecl install mongodb
+
 RUN rm -rf /etc/php/7.0/apache2/php.ini
 ADD config/php/php.ini /etc/php/7.0/apache2/
 
