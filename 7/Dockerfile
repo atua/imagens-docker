@@ -32,6 +32,15 @@ ADD config/php/cli/php.ini /etc/php/7.0/cli/
 RUN rm -rf /etc/php/7.0/mods-available/20-xdebug.ini
 ADD config/php/20-xdebug.ini /etc/php/7.0/mods-available/
 
+# Habilita o módulo do apache que trata as urls amigáveis
+RUN a2enmod rewrite
+
+# Remove o arquivo de configuração padrão do apache 
+RUN rm -rf /etc/apache2/apache2.conf
+
+# Adiciona o arquivo de configuração do apache com as alterações necessárias
+ADD config/apache/apache2.conf /etc/apache2/
+
 RUN php -r "readfile('https://getcomposer.org/installer');" | php; \
     mv composer.phar /usr/local/bin/composer; \
     chmod +x /usr/local/bin/composer
