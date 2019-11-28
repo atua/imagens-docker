@@ -1,0 +1,58 @@
+FROM php:7.3.12-apache
+
+# Adiciona um usuário sem privilégios de root
+RUN useradd -m nonroot --uid=1000
+
+# Configura o virtualhost
+COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
+
+# Atualiza a lista de pacotes
+RUN apt-get update
+
+# Instala dependências
+RUN apt-get install -y \
+    vim \
+    git \
+    zip \
+    libxml2-dev \
+    libpq-dev \
+    libzip-dev \
+    libpng-dev \
+    libmagickwand-dev \
+    libmcrypt-dev \
+    libc-client-dev \
+    libkrb5-dev \
+    xmlsec1
+
+# Instala módulos oficias do PHP sem necessidade de configuração
+RUN docker-php-ext-install -j$(nproc) soap  && \
+    docker-php-ext-install -j$(nproc) pgsql && \
+    docker-php-ext-install -j$(nproc) zip   && \
+    docker-php-ext-install -j$(nproc) gd
+    
+# Instala módulos oficias do PHP com necessidade de configuração
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
+    docker-php-ext-install -j$(nproc) imap
+
+# Instala módulos através do pecl
+RUN pecl install mongodb && \
+    pecl install imagick && \
+    pecl install xdebug  && \
+    pecl install mcrypt
+
+# Habilita módulos
+RUN docker-php-ext-enable mongodb && \
+    docker-php-ext-enable imagick && \
+    docker-php-ext-enable xdebug  && \
+    docker-php-ext-enable mcrypt
+
+# Habilita o módulo do apache que trata as urls amigáveis
+RUN a2enmod rewrite
+
+# Baixa o composer e cria o executável global
+RUN php -r "readfile('https://getcomposer.org/installer');" | php; \
+    mv composer.phar /usr/local/bin/composer; \
+    chmod +x /usr/local/bin/composer
+
+# Limpa a lista de pacotes
+RUN rm -r /var/lib/apt/lists/*
