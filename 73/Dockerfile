@@ -3,9 +3,6 @@ FROM php:7.3.12-apache
 # Adiciona um usuário sem privilégios de root
 RUN useradd -m nonroot --uid=1000
 
-# Configura o virtualhost
-COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
-
 # Atualiza a lista de pacotes
 RUN apt-get update
 
@@ -56,3 +53,12 @@ RUN php -r "readfile('https://getcomposer.org/installer');" | php; \
 
 # Limpa a lista de pacotes
 RUN rm -r /var/lib/apt/lists/*
+
+# Configura o virtualhost
+COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
+
+# Seta o php.ini-development como principal 
+RUN cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+
+# Copia as configurações necessárias
+COPY ./custom-configs.ini $PHP_INI_DIR/conf.d/
