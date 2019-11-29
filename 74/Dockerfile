@@ -1,4 +1,4 @@
-FROM php:7.3.12-apache
+FROM php:7.4.0-apache
 
 # Adiciona um usuário sem privilégios de root
 RUN useradd -m nonroot --uid=1000
@@ -19,7 +19,7 @@ RUN apt-get install -y \
     libmcrypt-dev \
     libc-client-dev \
     libkrb5-dev \
-    xmlsec1
+    xmlsec1 
 
 # Instala módulos oficias do PHP sem necessidade de configuração
 RUN docker-php-ext-install -j$(nproc) soap  && \
