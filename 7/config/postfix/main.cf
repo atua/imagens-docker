@@ -1,5 +1,0 @@
-relayhost = 192.168.0.3
-
-inet_interfaces = all
-
-header_checks = regexp:/etc/postfix/filtro

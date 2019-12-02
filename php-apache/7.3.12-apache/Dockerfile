@@ -19,7 +19,7 @@ RUN apt-get install -y \
     libmcrypt-dev \
     libc-client-dev \
     libkrb5-dev \
-    xmlsec1
+    xmlsec1 
 
 # Instala módulos oficias do PHP sem necessidade de configuração
 RUN docker-php-ext-install -j$(nproc) soap  && \
