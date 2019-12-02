@@ -25,7 +25,9 @@ RUN apt-get install -y \
 RUN docker-php-ext-install -j$(nproc) soap  && \
     docker-php-ext-install -j$(nproc) pgsql && \
     docker-php-ext-install -j$(nproc) zip   && \
-    docker-php-ext-install -j$(nproc) gd
+    docker-php-ext-install -j$(nproc) gd    && \ 
+    docker-php-ext-install -j$(nproc) pdo   && \ 
+    docker-php-ext-install -j$(nproc) pdo_pgsql
     
 # Instala módulos oficias do PHP com necessidade de configuração
 RUN PHP_OPENSSL=yes docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
