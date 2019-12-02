@@ -1,11 +1,15 @@
-## PHP 5.6
+## 7.3.12-apache
 
-    docker run --name php56 -h php56 -d -p 8056:80 -e TZ=America/Sao_Paulo -v /var/www/html/:/var/www/html atuadevops/php:56
+    docker run --name php73 -h php73 -d -p 8073:80 -e TZ=America/Sao_Paulo -v /var/www/html/:/var/www/html -w /var/www/html atuadevops/php-apache:7.3.12-apache
 
-## PHP 7
+## 7.4.0-apache
 
-    docker run --name php7 -h php7 -d -p 8070:80 -e TZ=America/Sao_Paulo -v /var/www/html/:/var/www/html atuadevops/php:7
+    docker run --name php74 -h php74 -d -p 8074:80 -e TZ=America/Sao_Paulo -v /var/www/html/:/var/www/html -w /var/www/html atuadevops/php-apache:7.4.0-apache
 
-## PHP 7.3
+## docker exec
 
-    docker run --name php73 -h php73 -d -p 8073:80 -e TZ=America/Sao_Paulo -v /var/www/html/:/var/www/html atuadevops/php:73
+    # root
+    docker exec -ti php74 /bin/bash
+
+    # nonroot
+    docker exec -ti --user=nonroot php74 /bin/bash
