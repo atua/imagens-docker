@@ -63,4 +63,4 @@ COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
 RUN cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 # Copia as configurações necessárias
-COPY ./custom-configs.ini $PHP_INI_DIR/conf.d/
+COPY ./config.ini $PHP_INI_DIR/conf.d/
