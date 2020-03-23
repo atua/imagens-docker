@@ -19,7 +19,8 @@ RUN apt-get install -y \
     libmcrypt-dev \
     libc-client-dev \
     libkrb5-dev \
-    xmlsec1 
+    xmlsec1 \
+    openssh-server
 
 # Instala módulos oficias do PHP sem necessidade de configuração
 RUN docker-php-ext-install -j$(nproc) soap  && \
@@ -64,3 +65,9 @@ RUN cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 # Copia as configurações necessárias
 COPY ./config.ini $PHP_INI_DIR/conf.d/
+
+# Seta uma senha para o usuário root para que seja possível acessar o container por ssh
+RUN echo "root:root" | chpasswd
+
+# Altera as configurações do ssh para permitir login como root
+RUN sed -i "s/#PermitRootLogin prohibit-password/PermitRootLogin yes/" /etc/ssh/sshd_config
