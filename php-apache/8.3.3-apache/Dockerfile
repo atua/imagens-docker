@@ -87,7 +87,7 @@ RUN sed -i "s/#PermitRootLogin prohibit-password/PermitRootLogin yes/" /etc/ssh/
 RUN sed -i 's/  \(<policy.*"coder".*rights=\)"none"\(.*"PDF".*>\)/  \1"read|write"\2/' /etc/ImageMagick-6/policy.xml
 
 # Configura xdebug
-RUN echo -e "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20230831/xdebug.so\n" \
+RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20230831/xdebug.so\n" \
          "xdebug.mode=debug\n" \
          "xdebug.start_with_request=yes\n" \
          "xdebug.discover_client_host=1\n" > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
