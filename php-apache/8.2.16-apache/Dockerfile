@@ -72,7 +72,7 @@ COPY vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # Seta o php.ini-development como principal 
 RUN cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-RUN sed -i "s/error_reporting = E_ALL/error_reporting = E_ALL \& ~E_DEPRECATED \& ~E_STRICT \& ~E_NOTICE \& ~E_WARNING/g" "$PHP_INI_DIR/php.ini"
+RUN sed -i "s/error_reporting = E_ALL/error_reporting = E_ALL \& ~E_NOTICE/g" "$PHP_INI_DIR/php.ini"
 
 # Copia as configurações necessárias
 COPY config.ini $PHP_INI_DIR/conf.d/
