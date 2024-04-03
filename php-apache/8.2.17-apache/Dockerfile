@@ -27,7 +27,8 @@ RUN apt-get install -y \
     zlib1g-dev \
     poppler-utils \
     unrar-free \
-    expect
+    expect \
+    wget
 
 # Instala módulos oficias do PHP sem necessidade de configuração
 RUN docker-php-ext-install -j$(nproc) soap  && \
@@ -92,4 +93,9 @@ RUN echo "zend_extension=xdebug.so\n" \
          "xdebug.start_with_request=yes\n" \
          "xdebug.discover_client_host=1\n" > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
+COPY git-bash-install.sh /usr/share/git-core/contrib
 
+RUN chmod +x /usr/share/git-core/contrib/git-bash-install.sh; \
+    /usr/share/git-core/contrib/git-bash-install.sh
+
+RUN echo "alias cdhtml='cd /var/www/html'" >> /root/.bashrc
