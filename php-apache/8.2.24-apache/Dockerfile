@@ -1,4 +1,4 @@
-FROM php:8.2.20-apache
+FROM php:8.2.24-apache
 
 # Adiciona um usuário sem privilégios de root
 RUN useradd -m nonroot --uid=1000
@@ -60,6 +60,7 @@ RUN docker-php-ext-enable mongodb && \
 
 # Habilita o módulo do apache que trata as urls amigáveis
 RUN a2enmod rewrite
+RUN a2enmod ssl
 
 # Baixa o composer e cria o executável global
 RUN php -r "readfile('https://getcomposer.org/installer');" | php; \
@@ -70,6 +71,8 @@ RUN php -r "readfile('https://getcomposer.org/installer');" | php; \
 RUN rm -r /var/lib/apt/lists/*
 
 # Configura o virtualhost
+COPY localhost.crt /etc/ssl/certs/localhost.crt
+COPY localhost.key /etc/ssl/private/localhost.key
 COPY vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # Seta o php.ini-development como principal 
