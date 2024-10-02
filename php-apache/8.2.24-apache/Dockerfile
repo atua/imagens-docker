@@ -71,8 +71,8 @@ RUN php -r "readfile('https://getcomposer.org/installer');" | php; \
 RUN rm -r /var/lib/apt/lists/*
 
 # Configura o virtualhost
-COPY localhost.crt /etc/ssl/certs/localhost.crt
-COPY localhost.key /etc/ssl/private/localhost.key
+COPY docker.local.crt /etc/ssl/certs/docker.local.crt
+COPY docker.local.key /etc/ssl/private/docker.local.key
 COPY vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # Seta o php.ini-development como principal 
