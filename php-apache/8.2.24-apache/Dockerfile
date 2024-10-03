@@ -71,9 +71,26 @@ RUN php -r "readfile('https://getcomposer.org/installer');" | php; \
 RUN rm -r /var/lib/apt/lists/*
 
 # Configura o virtualhost
-COPY docker.local.crt /etc/ssl/certs/docker.local.crt
-COPY docker.local.key /etc/ssl/private/docker.local.key
 COPY vhost.conf /etc/apache2/sites-available/000-default.conf
+RUN a2ensite 000-default
+
+# Configura o ssl
+#COPY AtuaByNstech-RootCA.key /etc/ssl/private/.
+#COPY AtuaByNstech-RootCA.crt /usr/local/share/ca-certificates/AtuaByNstech-RootCA.crt
+#RUN update-ca-certificates
+#COPY docker.local.crt /etc/ssl/certs/docker.local.crt
+#COPY docker.local.key /etc/ssl/private/docker.local.key
+#COPY vhost-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+#RUN a2ensite default-ssl
+COPY ssl-ca-signed-install.sh /usr/local/bin/.
+RUN chmod +x /usr/local/bin/ssl-ca-signed-install.sh
+COPY ssl-self-signed-install.sh /usr/local/bin/.
+RUN chmod +x /usr/local/bin/ssl-self-signed-install.sh
+
+# Atualiza certificados CAs ICP-Brasil
+COPY icp-brasil-install.sh /usr/local/bin/.
+RUN chmod +x /usr/local/bin/icp-brasil-install.sh; \
+    /usr/local/bin/icp-brasil-install.sh
 
 # Seta o php.ini-development como principal 
 RUN cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
@@ -96,9 +113,9 @@ RUN echo "zend_extension=xdebug.so\n" \
          "xdebug.start_with_request=yes\n" \
          "xdebug.discover_client_host=1\n" > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-COPY git-bash-install.sh /usr/share/git-core/contrib
-
-RUN chmod +x /usr/share/git-core/contrib/git-bash-install.sh; \
-    /usr/share/git-core/contrib/git-bash-install.sh
+# Configura prompt git
+COPY git-bash-install.sh /usr/local/bin/.
+RUN chmod +x /usr/local/bin/git-bash-install.sh; \
+    /usr/local/bin/git-bash-install.sh
 
 RUN echo "alias cdhtml='cd /var/www/html'" >> /root/.bashrc

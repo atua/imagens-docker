@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-COMPLETION=/usr/share/git-core/contrib/completion
+COMPLETION="/usr/share/git-core/contrib/completion"
 
 mkdir -p $COMPLETION
 cd $COMPLETION
@@ -12,7 +12,7 @@ wget -nc https://github.com/git/git/raw/master/contrib/completion/git-prompt.sh
 chmod +r git-completion.bash git-prompt.sh
 
 
-BASHRC=/root/.bashrc
+BASHRC="/root/.bashrc"
 
 echo "source $COMPLETION/git-completion.bash" >> $BASHRC
 echo "export GIT_PROMPT_ONLY_IN_REPO=1" >> $BASHRC
