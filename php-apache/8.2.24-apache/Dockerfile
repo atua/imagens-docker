@@ -97,6 +97,15 @@ RUN cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 # Copia as configurações necessárias
 COPY config.ini $PHP_INI_DIR/conf.d/
+COPY config-errors.ini $PHP_INI_DIR/conf.d/
+COPY php-errors-enable.sh /usr/local/bin/.
+RUN chmod +x /usr/local/bin/php-errors-enable.sh
+COPY php-errors-disable.sh /usr/local/bin/.
+RUN chmod +x /usr/local/bin/php-errors-disable.sh
+COPY php-jit-enable.sh /usr/local/bin/.
+RUN chmod +x /usr/local/bin/php-jit-enable.sh
+COPY php-jit-disable.sh /usr/local/bin/.
+RUN chmod +x /usr/local/bin/php-jit-disable.sh
 
 # Seta uma senha para o usuário root para que seja possível acessar o container por ssh
 RUN echo "root:root" | chpasswd
